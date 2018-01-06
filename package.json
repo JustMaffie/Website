@@ -1,6 +1,6 @@
 {
-  "name": "test",
-  "version": "0.1.0",
+  "name": "justmaffieswebsite",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "react": "^16.2.0",

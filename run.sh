@@ -1,1 +1,1 @@
-serve -s build
+serve -p 1234 -s build

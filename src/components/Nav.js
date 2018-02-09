@@ -1,20 +1,44 @@
 import React, { Component } from 'react';
-import { Container, Menu } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import {AppBar, Drawer, MenuItem} from 'material-ui'
+import {withRouter} from 'react-router-dom';
 
 class Nav extends Component {
+	constructor(props) {
+		super(props);
+		this.render = this.render.bind(this)
+    this.state = {open: false};
+  }
+
+  handleTouchMap() {
+    this.setState({open: !this.state.open});
+	}
+	
 	render() {
+		var redirectTo = (route) => {
+			return function(event) {
+				this.props.history.push(route)
+			}.bind(this)
+		}
+		redirectTo = redirectTo.bind(this)
+		var redirectToExternal = (url) => {
+			return function(event) {
+				var win = window.open(url, '_blank');
+				win.focus();
+			}
+		}
 		return (
 			<div>
-			  <Menu fixed='top' inverted> {/* For some reason the color prop doesn't work without inverted, I don't mind */}
-			    <Container>
-			      <Menu.Item as={Link} to="/" header>
-			        JustMaffie
-			      </Menu.Item>
-			      <Menu.Item as={Link} to="/donate">Donate</Menu.Item>
-			        {/*<Menu.Item as={Link} to="/projects">projects</Menu.Item>*/}
-			      </Container>
-			  </Menu>
+				<AppBar title="JustMaffie" onLeftIconButtonClick={this.handleTouchMap.bind(this)}>
+					<Drawer open={this.state.open}>
+						<AppBar title="JustMaffie" onLeftIconButtonClick={this.handleTouchMap.bind(this)}/>	
+						<MenuItem onClick={redirectTo("/")}>Home</MenuItem>
+						<MenuItem onClick={redirectTo("/donate")}>Donate</MenuItem>
+						<div style={{bottom:0,position:"fixed"}}>
+							<MenuItem onClick={redirectToExternal("https://github.com/JustMaffie/Website")}>This website is open source</MenuItem>
+							<MenuItem>Copyright &copy; JustMaffie 2018</MenuItem>
+						</div>
+					</Drawer>
+				</AppBar>
 			  <br />
 			  <br />
 			  <br />
@@ -22,5 +46,7 @@ class Nav extends Component {
 		)
 	}
 }
+
+Nav = withRouter(Nav)
 
 export default Nav;

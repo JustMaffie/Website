@@ -1,24 +1,16 @@
 import React, { Component } from 'react';
 import Layout from './Layout';
-import { Grid, Header, Icon } from 'semantic-ui-react'
+import {FontIcon} from 'material-ui';
 
 class NotFound extends Component {
 	render() {
 		return (
 		  <Layout>
-				<Grid padded textAlign='center' stretched>
-				  <Grid.Row columns='equal'>
-				    <Grid.Column>
-				      <Header as='h1' icon textAlign='center'>
-				        <Icon name='game' />
-				        404
-				        <Header.Subheader>
-				          I'm sorry, I don't seem to be able to find this page?
-				        </Header.Subheader>
-				      </Header>
-				    </Grid.Column>
-				  </Grid.Row>
-				</Grid>
+				<center>
+					<FontIcon	className="material-icons" style={{"font-size":"400%"}}>videogame_asset</FontIcon>
+					<h1>404</h1>
+					<h4 style={{color:"grey"}}>I'm sorry, I don't seem to be able to find this page?</h4>
+				</center>
 		  </Layout>
 		)
 	}
